@@ -1,0 +1,12 @@
+<link rel="stylesheet" type="text/css" href="__CSS__/style.css" media="all" />
+<script src="__JS__/jquery-1.3.2.js"></script>
+<script>
+    $(document).ready(function(){
+        $("li.item > ol").hide();
+        $("li.item").hover(function(){
+            $("ol",this).slideDown("fast");//$("ol",this): 寻找this中的ol.
+        },function(){
+            $("ol",this).slideUp("fast");
+        });
+    });
+</script>
