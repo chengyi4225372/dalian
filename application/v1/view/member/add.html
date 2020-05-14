@@ -88,7 +88,7 @@
 
        var urls = "{:url('member/add')}";
 
-       $.post(url,{'users':user,'pwd':pwd},function(ret){
+       $.post(urls,{'users':user,'pwd':pwd},function(ret){
            if(ret.code == 200){
                layer.msg(ret.msg,{icon:6},function(){
                    parent.location.reload();

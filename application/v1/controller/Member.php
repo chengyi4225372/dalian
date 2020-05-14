@@ -24,7 +24,8 @@ class Member extends Base {
     public function add(){
        if($this->request->isPost()){
            $data['users'] = input('post.user','','trim');
-           $data['pwd']   = input('post.pwd','','trim');
+           $data['pwd']   = md5(input('post.pwd','','trim'));
+           $data['create_time']   = time();
 
            $res = Db::name($this->table)->insertGetId($data);
 
