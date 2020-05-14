@@ -8,8 +8,11 @@
 namespace app\v1\controller;
 
 use think\Controller;
+use think\Db;
 
 class Login extends Controller {
+   protected  $dataform ='users';
+
 
     /**
      * @return bool|mixed\
@@ -21,7 +24,24 @@ class Login extends Controller {
         }
 
         if($this->request->isPost()){
+            $users = input('post.users','','trim');
+            $pwd   = input('post.pwds','','trim');
 
+            if(empty($users)){
+                 return json(['code'=>'302' ,'msg'=>'账号或者密码为空']);
+              }
+
+             $data = Db::name($this->dataform)->where('users',$users)->find();
+
+             /*
+             if(md5($pwd) !== $data['pwd']){
+                 return json(['code'=>'402' ,'msg'=>'密码不正确']);
+            }
+
+            if(isset($data) && md5($pwd) == $data['pwd']){
+                return json(['code'=>'200' ,'msg'=>'登录成功']);
+            }
+             */
         }
 
         return false;
