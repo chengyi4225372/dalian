@@ -21,6 +21,17 @@ class Index extends Controller
     }
 
     /**
+     * 新闻详情
+     */
+    public function info(){
+        if($this->request->isGet()){
+            return $this->fetch();
+        }
+
+        return  false;
+    }
+
+    /**
      * 联系我们
      */
     public function contact()
