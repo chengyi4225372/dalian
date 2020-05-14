@@ -44,10 +44,14 @@ class Login extends Controller {
         return false;
     }
 
-
+    /**
+     * @return bool|void
+     * 退出
+     */
     public function loginout(){
         if($this->request->isGet()){
-
+            session('amember',null);
+            return $this->redirect('login/index');
         }
         return false;
     }
