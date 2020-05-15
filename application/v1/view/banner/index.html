@@ -19,7 +19,7 @@
     <tr>
       <td></td>
       <td>
-        <img src="" alt="" style="height:60px; width: 160px;">
+        <img src="" alt="" style="height:60px; width: 160px;" onclick="show_photo(this)" />
       </td>
       <td></td>
       <td class="td-manage">
@@ -46,7 +46,7 @@
       $.get(obj,{'mid':id},function(ret){
         if(ret.code == 200){
           layer.msg(ret.msg,{icon:6},function(){
-            parent.location.href="{:url('member/index')}";
+            parent.location.href="{:url('banner/index')}";
           });
         }
 
@@ -57,6 +57,20 @@
         }
 
       })
+    });
+  }
+  /* 弹出图片 */
+  function  show_photo(obj){
+    var urls = $(obj).attr('src');
+
+    layer.open({
+      type: 1,
+      title: false,
+      closeBtn: 0,
+      area: ['auto'],
+      skin: 'layui-layer-nobg', //没有背景色
+      shadeClose: true,
+      content: urls,
     });
   }
 </script>

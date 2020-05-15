@@ -15,6 +15,9 @@ use app\v1\controller\Base;
 
 class Banner extends Base {
 
+    protected $table= 'banner';
+
+
     public function index(){
 
         return $this->fetch();

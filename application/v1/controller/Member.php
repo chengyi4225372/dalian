@@ -23,7 +23,7 @@ class Member extends Base {
 
     public function add(){
        if($this->request->isPost()){
-           $data['users'] = input('post.user','','trim');
+           $data['users'] = input('post.users','','trim');
            $data['pwd']   = md5(input('post.pwd','','trim'));
            $data['create_time']   = time();
 
@@ -40,25 +40,27 @@ class Member extends Base {
 
     public function edit(){
         if($this->request->isGet()){
-             $mid = input('get.mid');
+            $mid = input('get.mid','','int');
             if(empty($mid) || !isset($mid)){
                 return false;
             }
-            $infos = Db::name($this->table)->where('id',$mid)->find();
+            $infos = Db::name($this->table)->where('id',$mid)->where('status',1)->find();
             $this->assign('infos',$infos);
             return $this->fetch();
         }
 
         if($this->request->isPost()){
-            $mid = input('post.mid','','int');
+            $mid = input('post.mid');
             $data['users'] = input('post.users','','trim');
             $data['pwd'] = input('post.pwd','','trim');
             if(empty($mid) || !isset($mid)){
                 return false;
             }
-            $infos = Db::name($this->table)->where('id',$mid)->update(['users'=>$data['users'],'pwd'=>$data['users']]);
+            $info = Db::name($this->table)
+                ->where(['id'=>$mid])
+                ->update(['users'=>$data['users'],'pwd'=>md5($data['pwd'])]);
 
-            if($infos !== false){
+            if($info !== false){
                 return json(['code'=>200,'msg'=>'修改成功']);
             }else{
                 return json(['code'=>400,'msg'=>'修改失败']);

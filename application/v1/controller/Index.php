@@ -15,14 +15,16 @@ use app\v1\controller\Base;
 class Index extends Base {
 
    public function index(){
-       $member = session('amember');
-       $this->assign('member',$member);
        return $this->fetch();
    }
 
     public function welcome(){
-        $member = session('amember');
-        $this->assign('member',$member);
+        $member = Db::name('users')->where(['status'=>1])->count();
+        $gongs  = Db::name('gao')->where(['status'=>1])->count();
+        $news   = Db::name('news')->where(['status'=>1])->count();
+        $this->assign('members',$member);
+        $this->assign('gongs',$gongs);
+        $this->assign('news',$news);
         return $this->fetch();
     }
     

@@ -87,4 +87,25 @@ class Index extends Controller
     {
         return $this->fetch();
     }
+
+    /**
+     * 公告详情
+     */
+    public function ginfos(){
+        if($this->request->isGet()){
+             $mid = input('get.mid','','int');
+
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+
+            $infos = Db::name()->where(['id'=>$mid,'status'=>1])->find();
+
+            $this->assign('infos',$infos);
+
+            return $this->fetch();
+        }
+
+        return false;
+    }
 }

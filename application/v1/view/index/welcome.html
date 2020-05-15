@@ -13,7 +13,7 @@
     <body>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">{$member.users}</span>！当前时间:{:date('Y-m-d h:i:s', time())}</blockquote>
+            <span class="x-red">{$Think.session.ammeber['users']}</span>！当前时间:{:date('Y-m-d h:i:s', time())}</blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -25,46 +25,48 @@
                                     <ul class="layui-row layui-col-space10 layui-this">
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
+                                                <h3>新闻数</h3>
                                                 <p>
-                                                    <cite>66</cite></p>
+                                                    <cite>{$news}</cite>
+                                                </p>
                                             </a>
                                         </li>
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>会员数</h3>
                                                 <p>
-                                                    <cite>12</cite></p>
+                                                    <cite>{$members}</cite></p>
                                             </a>
                                         </li>
                                         <!--
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>回复数</h3>
-                                                <p>
-                                                    <cite>99</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>商品数</h3>
-                                                <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        -->
+                                                                      <li class="layui-col-xs2">
+                                                                          <a href="javascript:;" class="x-admin-backlog-body">
+                                                                              <h3>公告总数</h3>
+                                                                              <p>
+                                                                                  <cite>99</cite></p>
+                                                                          </a>
+                                                                      </li>
+
+                                                                   <li class="layui-col-xs2">
+                                                                       <a href="javascript:;" class="x-admin-backlog-body">
+                                                                           <h3>商品数</h3>
+                                                                           <p>
+                                                                               <cite>67</cite></p>
+                                                                       </a>
+                                                                   </li>
+                                                                   <li class="layui-col-xs2">
+                                                                       <a href="javascript:;" class="x-admin-backlog-body">
+                                                                           <h3>文章数</h3>
+                                                                           <p>
+                                                                               <cite>67</cite></p>
+                                                                       </a>
+                                                                   </li>
+                                                                   -->
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
                                                 <h3>公告数量</h3>
                                                 <p>
-                                                    <cite>6766</cite></p>
+                                                    <cite>{$gongs}</cite></p>
                                             </a>
                                         </li>
                                     </ul>

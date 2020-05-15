@@ -15,7 +15,6 @@ use app\v1\controller\Base;
 class Dang extends Base {
 
     public function index(){
-
         return $this->fetch();
     }
 

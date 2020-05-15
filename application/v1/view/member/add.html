@@ -1,6 +1,5 @@
 {include file='public/header' /}
     <div class="x-body">
-        <form class="layui-form">
           <div class="layui-form-item">
               <label for="user" class="layui-form-label">
                   <span class="x-red">*</span>登录名
@@ -68,7 +67,6 @@
                   增加
               </button>
           </div>
-      </form>
     </div>
     <script>
    function xadmin_btn(){
@@ -91,7 +89,7 @@
        $.post(urls,{'users':user,'pwd':pwd},function(ret){
            if(ret.code == 200){
                layer.msg(ret.msg,{icon:6},function(){
-                   parent.location.reload();
+                   parent.location.href="{:url('member/index')}";
                })
            }
 
