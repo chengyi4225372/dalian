@@ -43,7 +43,7 @@
              return false;
          }
 
-         var url = "{:url('v1/login/login')}";
+         var url = "{:url('v1/login/index')}";
 
          $.post(url,{'user':users,'pwds':pwd},function(ret){
                if(ret.code == 200){
@@ -53,6 +53,12 @@
                }
 
              if(ret.code == 402){
+                 layer.msg(ret.msg,{icon:5},function(){
+                     parent.location.reload();
+                 });
+             }
+
+             if(ret.code == 502){
                  layer.msg(ret.msg,{icon:5},function(){
                      parent.location.reload();
                  });

@@ -31,6 +31,10 @@ class Login extends Controller {
                 return json(['code'=>'302' ,'msg'=>'账号或者密码为空']);
             }
 
+            if($data['status'] =0){
+                return json(['code'=>502,'msg'=>'该用户已删除！']);
+            } 
+            
              if(md5($pwd) !== $data['pwd']){
                  return json(['code'=>'402' ,'msg'=>'密码不正确']);
             }

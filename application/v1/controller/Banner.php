@@ -2,24 +2,36 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2020/5/13 0013
- * Time: 18:11
- * 新闻控制器
+ * Date: 2020/5/15
+ * Time: 13:24
  */
+
 namespace  app\v1\controller;
 
 use think\Controller;
 use think\Db;
 use think\Request;
 
-class News extends Controller {
+class Banner extends Controller {
 
     public function index(){
 
         return $this->fetch();
     }
 
-    public function welcome(){
+
+    public function add(){
+
+        return $this->fetch();
+    }
+
+
+    public function edit(){
+
+        return $this->fetch();
+    }
+
+    public function del(){
 
         return $this->fetch();
     }

@@ -16,14 +16,14 @@ class Member extends Base {
     protected $table ='users';
 
     public function index(){
-        $data = Db::name($this->table)->order('id desc')->paginate(15);
+        $data = Db::name($this->table)->where('status',1)->order('id desc')->paginate(15);
         $this->assign('data',$data);
         return $this->fetch();
     }
 
     public function add(){
        if($this->request->isPost()){
-           $data['users'] = input('post.user','','trim');
+           $data['users'] = input('post.users','','trim');
            $data['pwd']   = md5(input('post.pwd','','trim'));
            $data['create_time']   = time();
 

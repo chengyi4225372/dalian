@@ -21,7 +21,7 @@ class Base extends Controller {
 
         //判断session是否存在账号
         if(empty(session('member')) && $this->request->url() != '/v1/index/index'){
-           // return  $this->redirect('login/index');
+           return  $this->redirect('login/index');
         }
 
     }
