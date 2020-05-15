@@ -71,7 +71,7 @@
       $.get(obj,{'mid':id},function(ret){
         if(ret.code == 200){
           layer.msg(ret.msg,{icon:6},function(){
-            parent.location.reload();
+            parent.location.href="{:url('member/index')}";
           });
         }
 

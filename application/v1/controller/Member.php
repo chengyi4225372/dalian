@@ -23,7 +23,7 @@ class Member extends Base {
 
     public function add(){
        if($this->request->isPost()){
-           $data['users'] = input('post.users','','trim');
+           $data['users'] = input('post.user','','trim');
            $data['pwd']   = md5(input('post.pwd','','trim'));
            $data['create_time']   = time();
 
@@ -47,6 +47,22 @@ class Member extends Base {
             $infos = Db::name($this->table)->where('id',$mid)->find();
             $this->assign('infos',$infos);
             return $this->fetch();
+        }
+
+        if($this->request->isPost()){
+            $mid = input('post.mid','','int');
+            $data['users'] = input('post.users','','trim');
+            $data['pwd'] = input('post.pwd','','trim');
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+            $infos = Db::name($this->table)->where('id',$mid)->update(['users'=>$data['users'],'pwd'=>$data['users']]);
+
+            if($infos !== false){
+                return json(['code'=>200,'msg'=>'修改成功']);
+            }else{
+                return json(['code'=>400,'msg'=>'修改失败']);
+            }
         }
          return  false;
     }

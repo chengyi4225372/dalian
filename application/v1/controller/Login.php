@@ -24,9 +24,9 @@ class Login extends Controller {
         }
 
         if($this->request->isPost()){
-            $users = input('post.users','','trim');
+            $users = input('post.user','','trim');
             $pwd   = input('post.pwds','','trim');
-            $data = Db::name($this->dataform)->where('users',$users)->find();
+            $data = Db::name($this->dataform)->where('users',$users)->where('status',1)->find();
             if(empty($data)){
                 return json(['code'=>'302' ,'msg'=>'账号或者密码为空']);
             }
