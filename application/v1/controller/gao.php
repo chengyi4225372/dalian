@@ -19,9 +19,23 @@ class Gao extends Controller {
         return $this->fetch();
     }
 
-    public function welcome(){
+    public function add(){
 
         return $this->fetch();
+    }
+
+    public function edit(){
+        if($this->request->isGet()){
+            return $this->fetch();
+        }
+
+        if($this->request->isPost()){
+
+        }
+    }
+
+    public function del(){
+        return false;
     }
 
 }
