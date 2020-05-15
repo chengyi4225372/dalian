@@ -12,7 +12,7 @@ use think\Controller;
 use think\Db;
 use think\Request;
 
-class Gao extends Controller {
+class Gao extends Base {
 
     public function index(){
 

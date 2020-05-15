@@ -11,8 +11,8 @@ namespace  app\v1\controller;
 use think\Controller;
 use think\Db;
 use think\Request;
-
-class News extends Controller {
+use app\v1\controller\Base;
+class News extends Base {
 
     public function index(){
 

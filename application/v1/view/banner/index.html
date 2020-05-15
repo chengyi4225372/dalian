@@ -6,9 +6,6 @@
     <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
-  <xblock>
-    <button class="layui-btn" onclick="x_admin_show('添加用户','{:url('banner/add')}',600,400)"><i class="layui-icon"></i>添加</button>
-  </xblock>
   <table class="layui-table">
     <thead>
     <tr>
@@ -20,8 +17,10 @@
     <tbody>
 
     <tr>
-      <td>去去去</td>
-      <td>2222</td>
+      <td></td>
+      <td>
+        <img src="" alt="" style="height:60px; width: 160px;">
+      </td>
       <td></td>
       <td class="td-manage">
         <a title="编辑"  onclick="x_admin_show('编辑','{:url('banner/edit',['mid'=>111])}',600,400)" href="javascript:;">
@@ -34,11 +33,9 @@
       </td>
     </tr>
     </tbody>
-    {/volist}
   </table>
 
   <div class="page">
-   {$data->render();}
   </div>
 
 </div>

@@ -29,6 +29,7 @@
       <td>{$vo.id}</td>
       <td>{$vo.users}</td>
       <td>{$vo.create_time|date="Y-m-d,H:i",###}</td>
+
       <td class="td-manage">
         <a title="编辑"  onclick="x_admin_show('编辑','{:url('member/edit',['mid'=>$vo.id])}',600,400)" href="javascript:;">
           <i class="layui-icon">&#xe642;</i>
@@ -38,6 +39,7 @@
           <i class="layui-icon">&#xe640;</i>
         </a>
       </td>
+
     </tr>
     </tbody>
     {/volist}
