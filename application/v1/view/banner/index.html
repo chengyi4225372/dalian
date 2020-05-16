@@ -5,6 +5,9 @@
   <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
     <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
+<xblock>
+  <button class="layui-btn" onclick="add_news_show('{:url('news/add')}');"><i class="layui-icon"></i>添加</button>
+</xblock>
 <div class="x-body">
   <table class="layui-table">
     <thead>
@@ -23,7 +26,7 @@
       </td>
       <td></td>
       <td class="td-manage">
-        <a title="编辑"  onclick="x_admin_show('编辑','{:url('banner/edit',['mid'=>111])}',600,400)" href="javascript:;">
+        <a title="编辑"  onclick="news_edit('{:url('news/edit',['mid'=>$vo.id])}')" href="javascript:;">
           <i class="layui-icon">&#xe642;</i>
         </a>
 
@@ -73,8 +76,11 @@
       content: urls,
     });
   }
+
+
+
+
 </script>
 
 </body>
-
 </html>

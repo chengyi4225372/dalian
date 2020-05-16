@@ -1,72 +1,40 @@
 {include file='public/header' /}
-    <div class="x-body">
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    <div  style="padding-top: 20px;">
           <div class="layui-form-item">
-              <label for="user" class="layui-form-label">
-                  <span class="x-red">*</span>登录名
+              <label for="title" class="layui-form-label">
+                  <span class="x-red">*</span>新闻标题
               </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="user" name="username" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>将会成为您唯一的登入名
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>密码
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="pwd" name="pass" required="" lay-verify="pass"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  6到16个字符
+              <div class="layui-input-block">
+                  <input type="text" id="title" value="" class="layui-input">
               </div>
           </div>
 
+        <div >
+            <label for="title" class="layui-form-label">
+                <span class="x-red">*</span>新闻信息
+            </label>
+            <div class="layui-input-inline">
+                <script id="editor" type="text/plain"></script>
+            </div>
+        </div>
+
           <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-              </label>
-              <button  class="layui-btn" lay-filter="add" onclick="add();">
-                  增加
+              <label for="repass" class="layui-form-label"></label>
+              <button  class="layui-btn"  id="addnews" >
+                  提交
               </button>
           </div>
     </div>
     <script>
-   function add(){
-      var user  =$.trim($('#user').val());
-      var pwd   =$.trim($('#pwd').val());
 
-       if(user =='' || user == undefined){
-           layer.tips('请输入用户名','#user');
-           return false;
-       }
+        //实例化编辑器
+        var ue = UE.getEditor('editor',{initialFrameWidth:'80%',initialFrameHeight:400,});
 
-
-       if(pwd =='' || pwd == undefined){
-           layer.tips('请输入密码','#user');
-           return false;
-       }
-
-       var urls = "{:url('member/add')}";
-
-       $.post(urls,{'users':user,'pwd':pwd},function(ret){
-           if(ret.code == 200){
-               layer.msg(ret.msg,{icon:6},function(){
-                   parent.location.reload();
-               })
-           }
-
-           if(ret.code == 400){
-               layer.msg(ret.msg,{icon:5},function(){
-                   parent.location.reload();
-               })
-           }
-       })
-   }
     </script>
-
   </body>
 
 </html>
