@@ -22,12 +22,12 @@ class Dang extends Base {
         }
 
         if($this->request->isPost()){
-            $mid  = input('post,id');
-            $text = input('post,text');
+            $mid  = input('post.mid');
+            $text = input('post.text');
             if(empty($mid) || !isset($mid)){
-                $ret = Db::name('company')->insert(['texts'=>$text]);
+                $ret = Db::name('dang')->insert(['texts'=>$text]);
             }else {
-                $ret = Db::name('company')->where(['id'=>$mid])->update(['texts'=>$text]);
+                $ret = Db::name('dang')->where(['id'=>$mid])->update(['texts'=>$text]);
             }
             if($ret !== false){
                 return json(['code'=>200,'msg'=>'提交成功']);

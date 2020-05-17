@@ -24,8 +24,9 @@ class Ye extends Base {
         }
 
         if($this->request->isPost()){
-            $mid  = input('post,id');
-            $text = input('post,text');
+            $mid  = input('post.mid');
+            $text = input('post.text');
+       
             if(empty($mid) || !isset($mid)){
                 $ret = Db::name('ye')->insert(['texts'=>$text]);
             }else {
