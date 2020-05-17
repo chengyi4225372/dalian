@@ -7,7 +7,7 @@
 </div>
 <div class="x-body">
   <xblock>
-    <button class="layui-btn" onclick="add_news_show('{:url('news/add')}')"><i class="layui-icon"></i>添加</button>
+    <button class="layui-btn" onclick="add_gao_show('{:url('gao/add')}')"><i class="layui-icon"></i>添加</button>
   </xblock>
   <table class="layui-table">
     <thead>
@@ -24,7 +24,7 @@
       <td>{$vo.title}</td>
       <td>{$vo.create_time|date="Y-m-d,H:i:s",###}</td>
       <td class="td-manage">
-        <a title="编辑" onclick="news_edit(this)" data-href="{:url('gao/edit')}?mid={$vo.id}"  href="javascript:;">
+        <a title="编辑" onclick="gao_edit(this)" data-href="{:url('gao/edit')}?mid={$vo.id}"  href="javascript:;">
           <i class="layui-icon">&#xe642;</i>
         </a>
 
@@ -60,14 +60,14 @@
   /**
    * 添加页面
    */
-  function add_news_show(urls){
+  function add_gao_show(urls){
     window.location.href = urls;
   }
 
   /**
    * 修改页面
    */
-  function news_edit(obj){
+  function gao_edit(obj){
     var urls = $(obj).attr('data-href');
     window.location.href= urls;
   }

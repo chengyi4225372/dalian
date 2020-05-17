@@ -17,6 +17,28 @@ class Ye extends Base {
 
     public function index(){
 
-        return $this->fetch();
+        if($this->request->isGet()){
+            $info = Db::name('ye')->order('id desc')->find();
+            $this->assign('info',$info);
+            return $this->fetch();
+        }
+
+        if($this->request->isPost()){
+            $mid  = input('post,id');
+            $text = input('post,text');
+            if(empty($mid) || !isset($mid)){
+                $ret = Db::name('ye')->insert(['texts'=>$text]);
+            }else {
+                $ret = Db::name('ye')->where(['id'=>$mid])->update(['texts'=>$text]);
+            }
+
+            if($ret !== false){
+                return json(['code'=>200,'msg'=>'提交成功']);
+            }else{
+                return json(['code'=>400,'msg'=>'提交失败']);
+            }
+        }
+
+        return false;
     }
 }

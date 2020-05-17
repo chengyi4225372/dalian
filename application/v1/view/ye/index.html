@@ -7,17 +7,20 @@
 </div>
 <div class="x-body">
 
+    <input type="hidden" id="mid" value="{$info.id}" />
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">文本域</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            <textarea placeholder="请输入内容" class="layui-textarea" id="text">
+                {$info.texts|default=''}
+            </textarea>
         </div>
     </div>
 
     <div class="layui-form-item">
         <label for="L_repass" class="layui-form-label">
         </label>
-        <button  class="layui-btn" lay-filter="add" onclick="xadmin_btn();">
+        <button  class="layui-btn"  onclick="ye_add();">
             提交
         </button>
     </div>
@@ -25,5 +28,30 @@
 </div>
 
 </body>
+<script>
+    function ye_add(){
+        var text =$.trim($('#text').val());
+        var  mid = $('#mid').val();
+        if(text == '' || text == undefined){
+            layer.msg('请输入内容');
+            return false;
+        }
+        var urls = "{:url('ye/index')}";
+        $.post(urls,{'mid':mid,'text':text},function(ret){
+            if(ret.code == 200){
+                layer.msg(ret.msg,{icon:6},function(){
+                    window.location.href ="{:url('ye/index')}";
+                });
+
+            }
+
+            if(ret.code == 400){
+                layer.msg(ret.msg,{icon:5},function(){
+                    window.location.reload();
+                });
+            }
+        },'json');
+    }
+</script>
 
 </html>
