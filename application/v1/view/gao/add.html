@@ -24,7 +24,7 @@
 
           <div class="layui-form-item">
               <label for="repass" class="layui-form-label"></label>
-              <button  class="layui-btn"  id="addnews" >
+              <button  class="layui-btn"  id="addgao" >
                   提交
               </button>
           </div>
@@ -34,6 +34,31 @@
         //实例化编辑器
         var ue = UE.getEditor('editor',{initialFrameWidth:'80%',initialFrameHeight:400,});
 
+        $('#addgao').click(function(){
+            var editors = ue.getContentTxt('editor');
+            var title = $.trim($('#title').val());
+
+
+            if(title == '' || title  == undefined){
+                layer.msg('请输入标题');
+                return false;
+            }
+            var urls = "{:url('gao/add')}";
+
+            $.post(urls,{'title':title,'content':editors},function(ret){
+                if(ret.code == 200){
+                    layer.msg(ret.msg,{icon:6});
+                    window.location.href= "{:url('gao/index')}";
+                }
+
+                if(ret.code == 400){
+                    layer.msg(ret.msg,{icon:5});
+                    window.location.reload();
+                }
+
+            },'json');
+
+        })
     </script>
   </body>
 

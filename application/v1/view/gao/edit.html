@@ -9,7 +9,7 @@
             <span class="x-red">*</span>新闻标题
         </label>
         <div class="layui-input-block">
-            <input type="text" id="title" value="" class="layui-input">
+            <input type="text" id="title" value="{$info.title}" class="layui-input">
         </div>
     </div>
 
@@ -18,13 +18,14 @@
             <span class="x-red">*</span>新闻信息
         </label>
         <div class="layui-input-inline">
-            <script id="editor" type="text/plain"></script>
+            <script id="editor" type="text/plain">{$info.content}</script>
         </div>
     </div>
+    <input type="hidden" id="mid" value="{$infos.id}" />
 
     <div class="layui-form-item">
         <label for="repass" class="layui-form-label"></label>
-        <button  class="layui-btn"  id="editnews" >
+        <button  class="layui-btn"  id="editgao" >
             提交
         </button>
     </div>
@@ -33,6 +34,33 @@
 
     //实例化编辑器
     var ue = UE.getEditor('editor',{initialFrameWidth:'80%',initialFrameHeight:400,});
+
+    $('#editgao').click(function(){
+        var editors = ue.getContentTxt('editor');
+        var title = $.trim($('#title').val());
+        var mid   = $('#mid').val();
+
+
+        if(title == '' || title  == undefined){
+            layer.msg('请输入标题');
+            return false;
+        }
+        var urls = "{:url('gao/edit')}";
+
+        $.post(urls,{'title':title,'content':editors,'mid':mid},function(ret){
+            if(ret.code == 200){
+                layer.msg(ret.msg,{icon:6});
+                window.location.href= "{:url('gao/index')}";
+            }
+
+            if(ret.code == 400){
+                layer.msg(ret.msg,{icon:5});
+                window.location.reload();
+            }
+
+        },'json');
+
+    })
 
 </script>
 </body>
