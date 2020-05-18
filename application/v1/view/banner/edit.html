@@ -1,8 +1,87 @@
 {include file='public/header' /}
 <div class="x-body">
+    <form class="layui-form">
 
+        <input type="hidden" id="mid" value="{$info.id}">
+        <div class="form-group">
+            <label for="images">商品图</label>
+            <br/>
+            <img id="Imgs" src="{$info.imgs|default='/static/admin/images/default.png'}"  onclick="onimgs()" style="width: 150px;height: 100px;">
+            <input type="file" onchange="upload_files()" class="form-control" id="file" style="display:none;" >
+            <input type="hidden" id="Images" value="{$info.imgs}" />
+        </div>
+
+        <div class="layui-form-item">
+            <label for="L_repass" class="layui-form-label">
+            </label>
+            <button  class="layui-btn" lay-filter="add" onclick="edit_imgupload()">
+                提交
+            </button>
+        </div>
+    </form>
 </div>
 <script>
+    /**
+     * 上传图片
+     */
+    function upload_files() {
+        var formData =new FormData();
+        formData.append("file",$("#file")[0].files[0]);
+
+        var urls = "{:url('banner/uploadfimgs')}";
+
+        $.ajax({
+            url: urls,
+            type: "post",
+            data: formData,
+            async:false,
+            dataType: 'json',
+            cache: false,
+            processData : false,
+            contentType : false,
+            success: function (ret) {
+                if (ret.code == 200) {
+                    $("#Imgs").attr('src', ret.path);
+                    $("#Images").val(ret.path);
+                    layer.msg(ret.msg,{icon:6});
+                } else {
+                    layer.msg(ret.msg);
+                }
+            },
+
+        });
+        return false;
+    }
+
+    function onimgs (){
+        $('#file').click();
+    }
+
+    /**
+     * 提交图
+     */
+    function edit_imgupload(){
+        var imgs = $('#Images').val();
+        var mid  = $('#mid').val();
+
+        if(imgs =='' || imgs == undefined){
+            layer.msg('请上传图片');
+            return false;
+        }
+        var urls = "{:url('banner/add')}";
+        $.post(urls,{'imgs':imgs,'mid':mid},function(ret){
+            if(ret.code == 200){
+                layer.msg(ret.msg,{icon:6});
+                window.location.href="{:url('banner/index')}";
+            }
+
+            if(ret.code == 400){
+                layer.msg(ret.msg,{icon:5});
+                window.location.reload();
+            }
+        })
+    }
+
 
 </script>
 

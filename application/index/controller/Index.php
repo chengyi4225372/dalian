@@ -9,6 +9,12 @@ class Index extends Controller
     //首页
     public function index()
     {
+        $news     =Db::name('news')->where(['status'=>1])->select();
+        $gao      =Db::name('gao')->where(['status'=>1])->select();
+        $company  =Db::name('company')->order('id desc')->find();
+        $this->assign('news',$news);
+        $this->assign('gao',$gao);
+        $this->assign('company',$company);
         return $this->fetch();
     }
 
@@ -17,6 +23,8 @@ class Index extends Controller
      */
     public function news()
     {
+        $list = Db::name('news')->where(['status'=>1])->select();
+        $this->assign('list',$list);
         return $this->fetch();
     }
 
@@ -25,6 +33,16 @@ class Index extends Controller
      */
     public function info(){
         if($this->request->isGet()){
+            $mid = input('get.mid','','int');
+
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+
+            $infos = Db::name('news')->where(['id'=>$mid,'status'=>1])->find();
+
+            $this->assign('infos',$infos);
+            
             return $this->fetch();
         }
 
@@ -44,6 +62,8 @@ class Index extends Controller
      */
     public function works()
     {
+        $dang = Db::name('dang')->order('id desc')->find();
+        $this->assign('dang',$dang);
         return $this->fetch();
     }
 
@@ -52,6 +72,8 @@ class Index extends Controller
      */
     public function service()
     {
+        $ret = Db::name('ye')->order('id desc')->find();
+        $this->assign('ret',$ret);
         return $this->fetch();
     }
 
@@ -68,6 +90,7 @@ class Index extends Controller
      */
     public function qiye()
     {
+
         return $this->fetch();
     }
 
@@ -99,7 +122,7 @@ class Index extends Controller
                 return false;
             }
 
-            $infos = Db::name()->where(['id'=>$mid,'status'=>1])->find();
+            $infos = Db::name('gao')->where(['id'=>$mid,'status'=>1])->find();
 
             $this->assign('infos',$infos);
 

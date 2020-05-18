@@ -16,7 +16,10 @@
             <div class="xxy-r-cen">
 				<div class="cont02-r-lcen001">
                         <ul>
-                            <li><a href="{:url('index/info')}">日前，总投资1.6亿元的大连东豪机械设备制造有限公司正式落户庄河临港工业区。</a><span>2010-05-05</span></li>
+                            {volist name='list' id='vo'}
+                            <li><a href="{:url('index/info')}?mid={$vo.id}">{$vo.title}</a>
+                                <span>{$vo.create_time|date="Y-m-d",###}</span></li>
+                             {/volist}
                         </ul>
                     </div>
                 

@@ -101,7 +101,7 @@ class Banner extends Base {
             mkdir($path,0755,true);
         }
 
-        $info = $file->move($path,false,true);
+        $info = $file->move($path);
         if($info){
             $mes = $info->getSaveName();
             $mes = str_replace("\\",'/',$mes);

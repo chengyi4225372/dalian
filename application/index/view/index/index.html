@@ -6,7 +6,9 @@
         	<h1><span>通知公告</span><a href="#" target="_blank">&gt;&gt;更多</a></h1>
             <div class="gongg-cen">
             	<ul>
-                	<li><a href="{:url('index/ginfos')}" target="_blank">大连开发区医院</a></li>
+                    {volist name='gao' id='go'}
+                	<li><a href="{:url('index/ginfos')}?mid={$go.id}" target="_blank">{$go.title}</a></li>
+                    {/volist}
                 </ul>
             </div>
         </div>
@@ -15,9 +17,11 @@
             <div class="news-r">
             	<div class="news-r-list">
                 	<ul>
-                        <li><a href="{:url('index/info')} target="_blank">·大连开发区医院</a>
-                            <span>09-16</span>
+                        {volist name='news' id='no'}
+                        <li><a href="{:url('index/info')}?mid={$no.id}" target="_blank">{$no.title}</a>
+                            <span>{$no.create_time|date="Y-m-d",###}</span>
                         </li>
+                        {/volist}
                     </ul>
                 </div>
                 <div class="hdp"><img src="/static/home/images/12345.jpg" /></div>
@@ -41,7 +45,7 @@
             <div class="about-cen">
             	<img src="/static/home/images/tp002.jpg" width="187" height="150" />
                 <div class="about-cen-r">
-                	<p>中国船舶燃料大连有限公司（简称中燃大连公司）直属于中国船舶燃料有限责任公司，系中远集团和中石油紧密型企业。公司成立于1972年，现有各类员工400余人，拥有各类供油供水船舶6艘、储量10万立方米油库一座、最大可停靠一万吨级船舶成品油码头8座以及船舶修理厂、润滑油加工厂、陆地装车台、油品化验室等完善的经营配套设施，是我国东北地区最大的水上供油供水专业性公司。公司主营业务是为国际、国内航行船舶供应燃油、润滑油和淡水。同时兼营成品油销售、润滑油来料加工以及油品仓储等业务。公司成立以来，先后为国内外160多个国家和地区的船公司提供过供油供水服务，在国内外客户中享有较高的声誉。</p>
+                	<p>{$company.texts|default=''}</p>
                 </div>
             </div>
             <div class="gg"><img src="/static/home/images/gg002.jpg" /></div>
