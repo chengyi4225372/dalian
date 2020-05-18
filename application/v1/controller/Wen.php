@@ -27,7 +27,7 @@ class Wen extends Base {
 
     public function add(){
         if($this->request->isPost()){
-
+               $data['title'] =
         }
 
         return $this->fetch();
