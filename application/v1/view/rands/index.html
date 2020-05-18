@@ -1,0 +1,57 @@
+{include file='public/header' /}
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+
+    <input type="hidden" id="mid" value="{$info.id}" />
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">文本域</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容"  id='text' class="layui-textarea">
+                {$info.texts|default=''}
+            </textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label">
+        </label>
+        <button  class="layui-btn"  onclick="dang_add();">
+            提交
+        </button>
+    </div>
+
+</div>
+
+</body>
+<script>
+    function dang_add(){
+        var text =$.trim($('#text').val());
+        var  mid = $('#mid').val();
+        if(text == '' || text == undefined){
+            layer.msg('请输入内容');
+            return false;
+        }
+
+        var urls = "{:url('rands/index')}";
+        $.post(urls,{'mid':mid,'text':text},function(ret){
+            if(ret.code == 200){
+                layer.msg(ret.msg,{icon:6},function(){
+                    window.location.href ="{:url('dang/index')}";
+                });
+
+            }
+
+            if(ret.code == 400){
+                layer.msg(ret.msg,{icon:5},function(){
+                    window.location.reload();
+                });
+            }
+        },'json');
+    }
+</script>
+</html>

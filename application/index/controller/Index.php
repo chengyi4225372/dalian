@@ -82,7 +82,9 @@ class Index extends Controller
      */
     public function rands()
     {
-     return $this->fetch();
+        $ret = Db::name('rands')->order('id desc')->find();
+        $this->assign('ret',$ret);
+        return $this->fetch();
     }
 
     /**
