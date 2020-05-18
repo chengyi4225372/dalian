@@ -25,7 +25,7 @@ class Banner extends Base {
     
     public function add(){
         if($this->request->isPost()){
-            $imgs = input('post.img','','trim');
+            $imgs = input('post.imgs','','trim');
             if(empty($imgs)){
                 return false;
             }
@@ -58,13 +58,16 @@ class Banner extends Base {
             }
 
         }
-        $mid = input('get.mid','','int');
-        if(empty($mid) || !isset($mid)){
-            return false;
+        if($this->request->isGet()){
+            $mid = input('get.mid','','int');
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+            $info = Db::name($this->table)->where(['id'=>$mid])->find();
+            $this->assign('info',$info);
+            return $this->fetch();
         }
-        $info = Db::name($this->table)->where(['id'=>$mid])->find();
-        $this->assign('info',$info);
-        return $this->fetch();
+       return false;
     }
     
     public function del(){

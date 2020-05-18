@@ -17,14 +17,14 @@
       <th>添加时间</th>
       <th>操作</th></tr>
     </thead>
+    {volist name='list' id='vo'}
     <tbody>
-
     <tr>
-      <td></td>
+      <td>{$vo.id}</td>
       <td>
-        <img src="" alt="" style="height:60px; width: 160px;" onclick="show_photo(this)" />
+        <img src="{$vo.imgs}"  style="height:60px; width: 160px;" />
       </td>
-      <td></td>
+      <td>{$vo.create_time|date="Y-m-d,H:i:s",###}</td>
       <td class="td-manage">
         <a title="编辑"  onclick="news_edit('{:url('banner/edit',['mid'=>$vo.id])}')" href="javascript:;">
           <i class="layui-icon">&#xe642;</i>
@@ -36,9 +36,11 @@
       </td>
     </tr>
     </tbody>
+    {/volist}
   </table>
 
   <div class="page">
+    {$list->render();}
   </div>
 
 </div>
@@ -49,31 +51,18 @@
       $.get(obj,{'mid':id},function(ret){
         if(ret.code == 200){
           layer.msg(ret.msg,{icon:6},function(){
-            parent.location.href="{:url('banner/index')}";
+            window.location.href="{:url('banner/index')}";
           });
+
         }
 
         if(ret.code == 400){
           layer.msg(ret.msg,{icon:5},function(){
-            parent.location.reload();
+            window.location.reload();
           });
         }
 
       })
-    });
-  }
-  /* 弹出图片 */
-  function  show_photo(obj){
-    var urls = $(obj).attr('src');
-
-    layer.open({
-      type: 1,
-      title: false,
-      closeBtn: 0,
-      area: ['auto'],
-      skin: 'layui-layer-nobg', //没有背景色
-      shadeClose: true,
-      content: urls,
     });
   }
 
@@ -82,12 +71,13 @@
     var urlk = "{:url('banner/add')}";
 
     layer.open({
-      type: 1,
-      title: false,
-      closeBtn: 0,
+      type: 2,
+      title: '添加',
       area: ['600px','400px'],
-      skin: 'layui-layer-nobg', //没有背景色
+      fix: false, //不固定
+      maxmin: true,
       shadeClose: true,
+      shade:0.4,
       content: urlk,
     });
   }
