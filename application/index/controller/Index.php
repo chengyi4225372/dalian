@@ -13,10 +13,12 @@ class Index extends Controller
         $gao      =Db::name('gao')->where(['status'=>1])->select();
         $banner   =Db::name('banner')->where(['status'=>1])->select();
         $company  =Db::name('company')->order('id desc')->find();
+        $wen      =Db::name('wen')->order('id desc')->limit(0,5)->select();
         $this->assign('news',$news);
         $this->assign('gao',$gao);
         $this->assign('company',$company);
         $this->assign('banner',$banner);
+        $this->assign('wen',$wen);
         return $this->fetch();
     }
 

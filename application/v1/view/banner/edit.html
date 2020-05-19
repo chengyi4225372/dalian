@@ -68,7 +68,7 @@
             layer.msg('请上传图片');
             return false;
         }
-        var urls = "{:url('banner/add')}";
+        var urls = "{:url('banner/edit')}";
         $.post(urls,{'imgs':imgs,'mid':mid},function(ret){
             if(ret.code == 200){
                 layer.msg(ret.msg,{icon:6});

@@ -1,4 +1,22 @@
 {include file='common/header' /}
+<script src="/static/home/js/jquery.min.js"></script>
+<script src="/static/home/js/ft-carousel.min.js"></script>
+<style>
+    .imgs2{
+        display:none;
+    }
+
+    .imgs3{
+        display:none;
+    }
+    .imgs4{
+        display:none;
+    }
+    .imgs5{
+        display:none;
+    }
+
+</style>
 
 <div class="content">
 	<div class="cont01">
@@ -26,9 +44,11 @@
                 </div>
 
                 <div class="hdp">
-                    {volist name="banner" id="vo"}
-                    <img src="{$vo.imgs}" data-id="{$vo.id}" style="width: 300px;height:185px;"  />
-                    {/volist}
+                    <ul class="carousel-inner">
+                        {foreach name="banner" item="vo" key="k" }
+                        <li  class="lun imgs{$k+1}"><img src="{$vo.imgs}" style="width: 310px;height:210px;" /></li>
+                        {/foreach}
+                    </ul>
                 </div>
 
                 <div class="clear"></div>
@@ -120,26 +140,32 @@
     	<h1><img src="/static/home/images/qywh.jpg" /></h1>
         <div class="cont04-cen">
         	<div class="cont03-cen">
+              {volist name="wen" id='wo'}
         	<dl>
-            	<dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                <dd><a href="#" target="_blank">图片展示</a></dd>
+            	<dt><a href="{:url('index/yes')}?mid={$vo.id}" >
+                    <img src="{$wo.imgs|default='/static/home/images/tp002.jpg'}" width="168" height="129" /></a></dt>
+                <dd><a href="{:url('index/yes')}?mid={$vo.id}" >{$wo.title}</a></dd>
             </dl>
-            <dl>
-            	<dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                <dd><a href="#" target="_blank">图片展示</a></dd>
-            </dl>
-            <dl>
-            	<dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                <dd><a href="#" target="_blank">图片展示</a></dd>
-            </dl>
-            <dl>
-            	<dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                <dd><a href="#" target="_blank">图片展示</a></dd>
-            </dl><div class="clear"></div>
+         {/volist}
+        <div class="clear"></div>
         </div>
         </div>
     </div>
 </div>
 
+<script>
+    var i =0;
+    setInterval(function(){
+        var a = $('.lun').length;
+         $(a).each(function(index,item){
+             i++;
+             if(i>item) {
+                 i =1;
+             }
+             $('.imgs'+i).show();
+             $('.imgs'+i).siblings().hide();
+         })
+    },1500)
+</script>
 
 {include file='common/foot' /}

@@ -57,7 +57,8 @@ class Banner extends Base {
                 return json(['code'=>400,'msg'=>'编辑失败']);
             }
 
-        }
+        } 
+        
         if($this->request->isGet()){
             $mid = input('get.mid','','int');
             if(empty($mid) || !isset($mid)){
