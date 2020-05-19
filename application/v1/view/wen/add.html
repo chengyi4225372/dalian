@@ -87,7 +87,8 @@
     function wen_add_news(){
         var imgs    = $('#Images').val();
         var title   = $('#title').val();
-        var content = ue.getContentTxt('editor');
+        var content = ue.getContent('editor');
+
 
 
         if(title =='' || title == undefined){
@@ -100,10 +101,6 @@
             return false;
         }
 
-        if(content  =='' || content == undefined){
-            layer.msg('请填写描述详情');
-            return false;
-        }
 
         var urls = "{:url('wen/add')}";
         $.post(urls,{'imgs':imgs,'title':title,'content':content},function(ret){

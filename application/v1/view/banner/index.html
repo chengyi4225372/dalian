@@ -34,7 +34,7 @@
           <i class="layui-icon">&#xe642;</i>
         </a>
 
-        <a title="删除" onclick="member_del('{:url('banner/del')}','{$vo.id}')" href="javascript:;">
+        <a title="删除" onclick="banner_del('{:url('banner/del')}','{$vo.id}');" href="javascript:;">
           <i class="layui-icon">&#xe640;</i>
         </a>
       </td>
@@ -49,24 +49,21 @@
 
 </div>
 <script>
-  /*用户-删除*/
-  function member_del(obj,id){
+  /*删除*/
+  function banner_del(obj,id){
     layer.confirm('确认要删除吗？',function(){
       $.get(obj,{'mid':id},function(ret){
         if(ret.code == 200){
-          layer.msg(ret.msg,{icon:6},function(){
+            layer.msg(ret.msg,{icon:6});
             window.location.href="{:url('banner/index')}";
-          });
-
         }
 
         if(ret.code == 400){
-          layer.msg(ret.msg,{icon:5},function(){
+            layer.msg(ret.msg,{icon:5});
             window.location.reload();
-          });
         }
 
-      })
+      },'json')
     });
   }
 

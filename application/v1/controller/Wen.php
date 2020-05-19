@@ -19,7 +19,7 @@ class Wen extends Base {
 
 
     public  function index(){
-        $list = Db::name($this->table)->where(['status'=>1])->paginate(15);
+        $list = Db::name($this->table)->where(['status'=>1])->order('id desc')->paginate(15);
         $this->assign('list',$list);
         return $this->fetch();
     }
@@ -86,7 +86,7 @@ class Wen extends Base {
             if(empty($mid) || !isset($mid)){
                 return false;
             }
-            $ret = Db::name('wen')->where(['id'=>$mid])->update(['status'=>1]);
+            $ret = Db::name('wen')->where(['id'=>$mid])->update(['status'=>0]);
             if($ret !== false){
                 return json(['code'=>200,'msg'=>'删除成功']);
             }else{

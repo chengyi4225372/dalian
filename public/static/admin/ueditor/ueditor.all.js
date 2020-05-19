@@ -7340,10 +7340,11 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             var me = this;
 
             me.fireEvent('beforesetcontent', html);
+            /*
             var root = UE.htmlparser(html);
             me.filterInputRule(root);
             html = root.toHtml();
-
+ */
             me.body.innerHTML = (isAppendTo ? me.body.innerHTML : '') + html;
 
 
@@ -10011,6 +10012,7 @@ UE.plugins['defaultfilter'] = function () {
                             node.setAttr('_href', val)
                         }
                         break;
+                    /*
                     case 'img':
                         //todo base64暂时去掉，后边做远程图片上传后，干掉这个
                         if (val = node.getAttr('src')) {
@@ -10021,6 +10023,7 @@ UE.plugins['defaultfilter'] = function () {
                         }
                         node.setAttr('_src', node.getAttr('src'));
                         break;
+                        */
                     case 'span':
                         if (browser.webkit && (val = node.getStyle('white-space'))) {
                             if (/nowrap|normal/.test(val)) {
@@ -17657,23 +17660,19 @@ UE.plugins['video'] = function (){
                 str = '<img ' + (id ? 'id="' + id+'"' : '') + ' width="'+ width +'" height="' + height + '" _url="'+url+'" class="' + classname.replace(/\bvideo-js\b/, '') + '"'  +
                     ' src="' + me.options.UEDITOR_HOME_URL+'themes/default/images/spacer.gif" style="background:url('+me.options.UEDITOR_HOME_URL+'themes/default/images/videologo.gif) no-repeat center center; border:1px solid gray;'+(align ? 'float:' + align + ';': '')+'" />'
                 break;
-            /*
+
             case 'embed':
-                str = '<embed type="application/x-shockwave-flash" class="' + classname + '" pluginspage="http://www.macromedia.com/go/getflashplayer"' +
+                str = '<embed ' +
                     ' src="' +  utils.html(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
-                    ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
-                break;
-                */
-            case 'embed':
-                str = '<embed src="' +  utils.html(url) + '" width="' + width  + '" height="' + height  + '"'  + (align ? ' style="float:' + align + '"': '') +
                     ' wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true" >';
                 break;
             case 'video':
                 var ext = url.substr(url.lastIndexOf('.') + 1);
                 if(ext == 'ogv') ext = 'ogg';
-                str = '<video' + (id ? ' id="' + id + '"' : '') + ' class="' + classname + ' video-js" ' + (align ? ' style="float:' + align + '"': '') +
-                    ' controls preload="none" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}">' +
-                    '<source src="' + url + '" type="video/' + ext + '" /></video>';
+                    str = '<video' + (id ? ' id="' + id + '"' : '') + ' class="' + classname + ' video-js" ' + (align ? ' style="float:' + align + '"': '') +
+                        ' controls preload="none" width="' + width + '" height="' + height + '" src="' + url + '" data-setup="{}" >' +
+                        '<source src="' + url + '" type="video/' + ext + '" /></video><span style="display:none"></span><br/>';
+
                 break;
         }
         return str;
@@ -17682,14 +17681,16 @@ UE.plugins['video'] = function (){
     function switchImgAndVideo(root,img2video){
         utils.each(root.getNodesByTagName(img2video ? 'img' : 'embed video'),function(node){
             var className = node.getAttr('class');
+            /*
             if(className && className.indexOf('edui-faked-video') != -1){
-                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'embed':'image');
+                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'embed':'video');
                 node.parentNode.replaceChild(UE.uNode.createElement(html),node);
             }
             if(className && className.indexOf('edui-upload-video') != -1){
-                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'video':'image');
+                var html = creatInsertStr( img2video ? node.getAttr('_url') : node.getAttr('src'),node.getAttr('width'),node.getAttr('height'),null,node.getStyle('float') || '',className,img2video ? 'video':'video');
                 node.parentNode.replaceChild(UE.uNode.createElement(html),node);
             }
+            */
         })
     }
 
@@ -17775,16 +17776,17 @@ UE.plugins['video'] = function (){
                 cl = (type == 'upload' ? 'edui-upload-video video-js vjs-default-skin':'edui-faked-video');
                 html.push(creatInsertStr( vi.url, vi.width || 420,  vi.height || 280, id + i, null, cl, 'embed'));
             }
+
             me.execCommand("inserthtml",html.join(""),true);
             var rng = this.selection.getRange();
-            /*
+           /*
             for(var i= 0,len=videoObjs.length;i<len;i++){
                 var img = this.document.getElementById('tmpVedio'+i);
                 domUtils.removeAttributes(img,'id');
                 rng.selectNode(img).select();
                 me.execCommand('imagefloat',videoObjs[i].align)
-            }
-            */
+            }*/
+
 
         },
         queryCommandState : function(){

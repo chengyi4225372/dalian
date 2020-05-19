@@ -89,8 +89,9 @@
     function wen_add_news(){
         var imgs    = $('#Images').val();
         var title   = $('#title').val();
-        var content = ue.getContentTxt('editor');
+        var content = ue.getContent('editor');
         var mid     = $('#mid').val();
+
 
         if(title =='' || title == undefined){
             layer.msg('请填写标题!');
@@ -102,10 +103,7 @@
             return false;
         }
 
-        if(content  =='' || content == undefined){
-            layer.msg('请填写描述详情');
-            return false;
-        }
+
 
         var urls = "{:url('wen/edit')}";
         $.post(urls,{'imgs':imgs,'title':title,'content':content,'mid':mid},function(ret){

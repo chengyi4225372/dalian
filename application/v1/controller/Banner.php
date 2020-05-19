@@ -73,10 +73,11 @@ class Banner extends Base {
     
     public function del(){
         if($this->request->isGet()){
-            $mid = input('get.mid','','int');
+            $mid = input('get.mid');
             if(empty($mid) || !isset($mid)){
                 return false;
             }
+
 
             $ret = Db::name($this->table)->where(['id'=>$mid])->update(['status'=>0]);
 
