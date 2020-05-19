@@ -84,15 +84,13 @@
     layer.confirm('确认要删除吗？',function(){
       $.get(obj,{'mid':id},function(ret){
         if(ret.code == 200){
-          layer.msg(ret.msg,{icon:6},function(){
-            parent.location.href="{:url('member/index')}";
-          });
+          layer.msg(ret.msg,{icon:6});
+          window.location.href="{:url('member/index')}";
         }
 
         if(ret.code == 400){
-          layer.msg(ret.msg,{icon:5},function(){
-            parent.location.reload();
-          });
+          layer.msg(ret.msg,{icon:5});
+            window.location.reload();
         }
 
       })

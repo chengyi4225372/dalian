@@ -22,9 +22,11 @@ class Index extends Base {
         $member = Db::name('users')->where(['status'=>1])->count();
         $gongs  = Db::name('gao')->where(['status'=>1])->count();
         $news   = Db::name('news')->where(['status'=>1])->count();
+        $wen    = Db::name('wen')->where(['status'=>1])->count();
         $this->assign('members',$member);
         $this->assign('gongs',$gongs);
         $this->assign('news',$news);
+        $this->assign('wen',$wen);
         return $this->fetch();
     }
     
