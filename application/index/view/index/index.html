@@ -24,7 +24,13 @@
                         {/volist}
                     </ul>
                 </div>
-                <div class="hdp"><img src="/static/home/images/12345.jpg" /></div>
+
+                <div class="hdp">
+                    {volist name="banner" id="vo"}
+                    <img src="{$vo.imgs}" data-id="{$vo.id}" style="width: 300px;height:185px;"  />
+                    {/volist}
+                </div>
+
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>

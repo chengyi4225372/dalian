@@ -11,10 +11,12 @@ class Index extends Controller
     {
         $news     =Db::name('news')->where(['status'=>1])->select();
         $gao      =Db::name('gao')->where(['status'=>1])->select();
+        $banner   =Db::name('banner')->where(['status'=>1])->select();
         $company  =Db::name('company')->order('id desc')->find();
         $this->assign('news',$news);
         $this->assign('gao',$gao);
         $this->assign('company',$company);
+        $this->assign('banner',$banner);
         return $this->fetch();
     }
 
@@ -92,10 +94,28 @@ class Index extends Controller
      */
     public function qiye()
     {
-
+        $list = Db::name('wen')->where(['status'=>1])->select();
+        $this->assign('list',$list);
         return $this->fetch();
     }
 
+
+    /**
+     * 企业文化详情
+     */
+     public function yes(){
+         if($this->request->isGet()){
+             $mid= input('get.mid');
+             if(empty($mid) || !isset($mid)){
+                 return false;
+             }
+             $info = Db::name('wen')->where(['status'=>1,'id'=>$mid])->find();
+             $this->assign('info',$info);
+             return $this->fetch();
+         }
+
+         return false;
+     }
 
     /**
      * 人力资源

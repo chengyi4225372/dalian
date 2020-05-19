@@ -15,30 +15,12 @@
         	<h1>企业文化</h1>
             <div class="xxy-r-cen">
 				<div class="cont03-cen01">
+                    {volist name="list" id='vo'}
                     <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
+                        <dt><a href="{:url('index/yes')}?mid={$vo.id}" target="_blank"><img src="{$vo.imgs}" width="168" height="129" /></a></dt>
+                        <dd><a href="{:url('index/yes')}?mid={$vo.id}" target="_blank">{$vo.title}</a></dd>
                     </dl>
-                    <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
-                    </dl>
-                    <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
-                    </dl>
-                    <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
-                    </dl>
-                    <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
-                    </dl>
-                    <dl>
-                        <dt><a href="#" target="_blank"><img src="/static/home/images/tp002.jpg" width="168" height="129" /></a></dt>
-                        <dd><a href="#" target="_blank">图片展示</a></dd>
-                    </dl>
+                    {/volist}
                     <div class="clear"></div>
                 </div>
                 

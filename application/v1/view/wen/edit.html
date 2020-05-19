@@ -1,26 +1,52 @@
 {include file='public/header' /}
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/static/admin/ueditor/lang/zh-cn/zh-cn.js"></script>
+<body>
 <div class="x-body">
-    <form class="layui-form">
 
-        <input type="hidden" id="mid" value="{$info.id}">
-        <div class="form-group">
-            <label for="images">商品图</label>
-            <br/>
+    <input type="hidden" id="mid" value="{$info.id}" />
+
+    <div class="layui-form-item">
+        <label for="username" class="layui-form-label">
+            <span class="x-red">*</span>标题
+        </label>
+        <div class="layui-input-block">
+            <input type="text" id="title" lay-verify="required"
+                   value="{$info.title}" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label for="username" class="layui-form-label">
+            <span class="x-red">*</span>企业文化图
+        </label>
+        <div class="layui-input-inline">
             <img id="Imgs" src="{$info.imgs|default='/static/admin/images/default.png'}"  onclick="onimgs()" style="width: 150px;height: 100px;">
             <input type="file" onchange="upload_files()" class="form-control" id="file" style="display:none;" >
             <input type="hidden" id="Images" value="{$info.imgs}" />
         </div>
+    </div>
 
-        <div class="layui-form-item">
-            <label for="L_repass" class="layui-form-label">
-            </label>
-            <button  class="layui-btn" lay-filter="add" onclick="edit_imgupload()">
-                提交
-            </button>
-        </div>
-    </form>
+
+    <div class="layui-form-item ">
+        <label for="username" class="layui-form-label">
+            <span class="x-red">*</span>文化内容详情
+        </label>
+        <script id="editor" type="text/plain">{$info.content}</script>
+    </div>
+    <div class="layui-form-item">
+        <label for="L_repass" class="layui-form-label" style="padding-left: 120px;">
+        </label>
+        <button  class="layui-btn"  onclick="wen_add_news();" >
+            提交
+        </button>
+    </div>
 </div>
+</body>
 <script>
+    //实例化编辑器
+    var ue = UE.getEditor('editor',{initialFrameWidth:'80%',initialFrameHeight:400,});
     /**
      * 上传图片
      */
@@ -28,7 +54,7 @@
         var formData =new FormData();
         formData.append("file",$("#file")[0].files[0]);
 
-        var urls = "{:url('banner/uploadfimgs')}";
+        var urls = "{:url('wen/uploadfimgs')}";
 
         $.ajax({
             url: urls,
@@ -58,21 +84,34 @@
     }
 
     /**
-     * 提交图
+     * 提交
      */
-    function edit_imgupload(){
-        var imgs = $('#Images').val();
-        var mid  = $('#mid').val();
+    function wen_add_news(){
+        var imgs    = $('#Images').val();
+        var title   = $('#title').val();
+        var content = ue.getContentTxt('editor');
+        var mid     = $('#mid').val();
+
+        if(title =='' || title == undefined){
+            layer.msg('请填写标题!');
+            return false;
+        }
 
         if(imgs =='' || imgs == undefined){
             layer.msg('请上传图片');
             return false;
         }
-        var urls = "{:url('banner/add')}";
-        $.post(urls,{'imgs':imgs,'mid':mid},function(ret){
+
+        if(content  =='' || content == undefined){
+            layer.msg('请填写描述详情');
+            return false;
+        }
+
+        var urls = "{:url('wen/edit')}";
+        $.post(urls,{'imgs':imgs,'title':title,'content':content,'mid':mid},function(ret){
             if(ret.code == 200){
                 layer.msg(ret.msg,{icon:6});
-                window.location.href="{:url('banner/index')}";
+                window.location.href="{:url('wen/index')}";
             }
 
             if(ret.code == 400){

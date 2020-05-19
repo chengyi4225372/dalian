@@ -24,30 +24,74 @@ class Wen extends Base {
         return $this->fetch();
     }
 
-
     public function add(){
         if($this->request->isPost()){
-               $data['title'] =
+               $data['title'] = input('post.title');
+               $data['imgs'] = input('post.imgs');
+               $data['content'] = input('post.content');
+               $data['create_time'] = time();
+
+              $res = Db::name('wen')->insertGetId($data);
+
+            if($res !== false){
+                return json(['code'=>200,'msg'=>'添加成功']);
+            }else{
+                return json(['code'=>400,'msg'=>'添加失败']);
+            }
         }
 
         return $this->fetch();
     }
 
-    public function  edit(){
+    public function edit(){
 
         if($this->request->isGet()){
+            $mid = input('get.mid');
+
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+            $info =  Db::name('wen')->where(['id'=>$mid])->find();
+            $this->assign('info',$info);
             return $this->fetch();
         }
 
         if($this->request->isPost()){
+            $data['title'] = input('post.title');
+            $data['imgs'] = input('post.imgs');
+            $data['content'] = input('post.content');
+            $mid = input('post.mid');
+
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+
+            $ret = Db::name('wen')->where(['id'=>$mid])->update($data);
+
+            if($ret !== false){
+                return json(['code'=>200,'msg'=>'编辑成功']);
+            }else{
+                return json(['code'=>400,'msg'=>'编辑失败']);
+            }
 
         }
+
         return false;
     }
 
-
     public function del(){
         if($this->request->isGet()){
+            $mid = input('get.mid');
+
+            if(empty($mid) || !isset($mid)){
+                return false;
+            }
+            $ret = Db::name('wen')->where(['id'=>$mid])->update(['status'=>1]);
+            if($ret !== false){
+                return json(['code'=>200,'msg'=>'删除成功']);
+            }else{
+                return json(['code'=>400,'msg'=>'删除失败']);
+            }
 
         }
 
